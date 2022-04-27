@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
         Database db = Database.getInstance();
-        db.registerConsumer(new Consumer(123,"kunal1", "pass", "kunal@gmail.com"));
-        db.loginConsumer("kuna","pass");
+        db.registerConsumer(new Consumer("kunal1", "pass", "kunal@gmail.com"));
+        db.loginConsumer("kunal1","pass");
     }
     public void Login(String Uname,String pass,String email){
 //        if(Uname=="");
