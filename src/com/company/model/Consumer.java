@@ -6,12 +6,27 @@ import java.util.List;
 public class Consumer extends User{
     List<Requirement> requirementList;
     List<Adhoc> adhocList;
+    String consumerAddress;
     public Consumer(String username, String password, String emailId){
         super( username, password, emailId);
         requirementList = new ArrayList<Requirement>();
         adhocList = new ArrayList<Adhoc>();
+        consumerAddress = "";
     }
-//    public void addRequirement(Requirement r){
+
+    public void setConsumerAddress(String consumerAddress) {
+        this.consumerAddress = consumerAddress;
+    }
+
+    public void setAdhocList(List<Adhoc> adhocList) {
+        this.adhocList = adhocList;
+    }
+
+    public void setRequirementList(List<Requirement> requirementList) {
+        this.requirementList = requirementList;
+    }
+
+    //    public void addRequirement(Requirement r){
 //        requirementList.add(r);
 //    }
 //    public void removeRequirement(Requirement r){
@@ -31,6 +46,4 @@ public class Consumer extends User{
         for(int i=0;i<adhocList.size();i++)
             System.out.println(adhocList.get(i));
     }
-
-
 }

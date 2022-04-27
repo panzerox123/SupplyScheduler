@@ -32,10 +32,10 @@ public class Database {
         } else return null;
     }
 
-    public Document loginConsumer(String username, String password){
+    public Consumer loginConsumer(String username, String password){
         MongoCollection<Document> consumers = db.getCollection("consumers");
         Document d = consumers.find(Filters.and(Filters.eq("username", username), Filters.eq("password", password))).first();
-        if(d != null) return d;
+        if(d != null) return new Consumer(d.get("username").toString(), d.get("password").toString(), d.get("email").toString());
         else return null;
     }
 

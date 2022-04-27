@@ -7,29 +7,23 @@ public class Producer extends Consumer{
     String producerAddress;
     String producerName;
     List<Supply> supplyList;
-    public Producer( String username, String password, String emailId){
+    public Producer(String username, String password, String emailId){
         super(username, password, emailId);
         supplyList = new ArrayList<Supply>();
+        producerName = "";
+        producerAddress = "";
     }
 
-    @Override
-    public int getUid() {
-        return super.getUid();
+    public void setProducerAddress(String producerAddress) {
+        this.producerAddress = producerAddress;
     }
 
-    @Override
-    public String getEmailId() {
-        return super.getEmailId();
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
     }
 
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return super.getUsername();
+    public void setSupplyList(List<Supply> supplyList) {
+        this.supplyList = supplyList;
     }
 
     public String getProducerAddress() {

@@ -21,9 +21,4 @@ public class Cart {
         totalCost-=c.totalCost;
         noOfItems-=1;
     }
-
-
-
-
-
 }
