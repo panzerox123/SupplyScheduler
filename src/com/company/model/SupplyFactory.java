@@ -7,7 +7,8 @@ public class SupplyFactory {
                 return new Perishable();
             case 2:
                 return new Packaged();
+            default:
+                return null;
         }
-        return null;
     }
 }
