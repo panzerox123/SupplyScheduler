@@ -5,8 +5,14 @@ import java.util.List;
 
 public class Producer extends Consumer{
     List<Supply> supplyList;
-    public Producer(int uid, String username, String password, String emailId){
-        super(uid, username, password, emailId);
+    public Producer(String username, String password, String emailId){
+        super(username, password, emailId);
         supplyList = new ArrayList<Supply>();
+    }
+    public void addProduct(Supply prod){
+        supplyList.add(prod);
+    }
+    public void removeProduct(Supply prod){
+        supplyList.remove(prod);
     }
 }

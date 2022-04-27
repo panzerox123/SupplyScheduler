@@ -5,10 +5,10 @@ public abstract class User {
     String username;
     String password;
     String emailId;
-    public User(int uid, String username, String password, String emailId){
-        this.uid = uid;
+    public User(String username, String password, String emailId){
         this.username = username;
         this.password = password;
         this.emailId = emailId;
     }
+
 }

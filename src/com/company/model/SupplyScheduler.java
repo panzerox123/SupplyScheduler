@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class SupplyFactory {
+public class SupplyScheduler {
     public static Supply getSupply(int type){
         switch (type){
             case 1:

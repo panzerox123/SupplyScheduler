@@ -1,5 +1,11 @@
 package com.company.model;
 
-public class Requirement extends CartItem{
-    int repeatDays; // Number of days between
+public class Requirement{
+    int interval; // Number of days between
+    String address;
+    String description;
+
+
+
 }
+
