@@ -7,8 +7,8 @@ public class Producer extends Consumer{
     String producerAddress;
     String producerName;
     List<Supply> supplyList;
-    public Producer(int uid, String username, String password, String emailId){
-        super(uid, username, password, emailId);
+    public Producer( String username, String password, String emailId){
+        super(username, password, emailId);
         supplyList = new ArrayList<Supply>();
     }
 
