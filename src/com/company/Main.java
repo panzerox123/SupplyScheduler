@@ -2,12 +2,15 @@ package com.company;
 
 import com.company.model.Producer;
 import com.company.model.Supply;
+import com.company.view.SingletonUI;
+import com.company.view.UI;
 
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
+        /*
         DatabaseController db = DatabaseController.getInstance();
         String res = db.registerProducer(new Producer("kunal1", "pass", "kunal@gmail.com"));
         System.out.println("here" + res);
@@ -24,6 +27,10 @@ public class Main {
         Database db = Database.getInstance();
         db.registerConsumer(new Consumer("kunal1", "pass", "kunal@gmail.com"));
         db.loginConsumer("kunal1","pass");
+        */
+        //new UI();
+        SingletonUI ui = SingletonUI.getInstance();
+        ui.setVisible();
     }
     public void Login(String Uname,String pass,String email){
 //        if(Uname=="");

@@ -4,6 +4,7 @@ import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class DatabaseController {
     public String loginConsumer(String username, String password){
         MongoCollection<Document> consumers = db.getCollection("consumers");
         Document d = consumers.find(Filters.and(Filters.eq("username", username), Filters.eq("password", password))).first();
+        System.out.println(d);
         if(d != null) return d.get("_id").toString();
         else return null;
     }
@@ -55,8 +57,9 @@ public class DatabaseController {
     }
 
     public String loginProducer(String username, String password){
-        MongoCollection<Document> producers = db.getCollection("consumers");
+        MongoCollection<Document> producers = db.getCollection("producers");
         Document d = producers.find(Filters.and(Filters.eq("username", username), Filters.eq("password", password))).first();
+        System.out.println(d);
         if(d != null) return d.get("_id").toString();
         else return null;
     }
@@ -71,9 +74,18 @@ public class DatabaseController {
         Document d = supplies.find(current).first();
         if(d==null){
             InsertOneResult res = supplies.insertOne(current);
-            System.out.println(res.getInsertedId().asObjectId().getValue().toString());
-            return res.getInsertedId().toString();
+            return res.getInsertedId().asObjectId().getValue().toString();
         } else return null;
+    }
+
+    public void deleteSupply(String supply_id){
+        MongoCollection<Document> supplies = db.getCollection("supplies");
+        ObjectId id = new ObjectId(supply_id);
+        Document d = supplies.find(Filters.eq("_id", id)).first();
+        System.out.println("None");
+        if(d!=null) {
+            System.out.println("None1");
+            supplies.deleteOne(d);}
     }
 
     public ArrayList<Supply> getSupplies(){
@@ -93,13 +105,24 @@ public class DatabaseController {
         if(ds == null) return null;
         for(Document d: ds){
             Supply new_supply = SupplyScheduler.getSupply(1, d.getString("name"), d.getInteger("cost"), d.getInteger("stock"));
-            new_supply.setItem_id(d.getString("_id"));
+            new_supply.setItem_id(d.getObjectId("_id").toString());
             out.add(new_supply);
         }
         return out;
     }
 
-    public String getItem(String consumer_id, Requirement, )
+    public Supply returnSupply(String supply_id){
+        MongoCollection<Document> supplies = db.getCollection("supplies");
+        ObjectId id = new ObjectId(supply_id);
+        Document d = supplies.find(Filters.eq("_id", id)).first();
+        if(d == null) return null;
+        Supply s = new Packaged(
+                d.getString("name"),
+                d.getInteger("cost"),
+                d.getInteger("stock")
+        );
+        return s;
+    }
 
     public String storeRequirement(String consumer_id, Requirement requirement){
         MongoCollection<Document> requirements = db.getCollection("requirements");
@@ -131,6 +154,7 @@ public class DatabaseController {
 
     public String getRequirements(String consumer_id){
         MongoCollection<Document> requirements = db.getCollection("requirements");
+        return null;
     }
 
     public String storeAdhoc(Consumer consumer){

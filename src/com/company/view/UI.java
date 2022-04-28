@@ -76,7 +76,7 @@ public class UI {
     JButton backButLoginsSupply = new JButton("Back");
     int isPerishable = 0;
 
-    UI() {
+    public UI() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600);
 

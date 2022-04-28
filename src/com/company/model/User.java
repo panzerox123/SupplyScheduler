@@ -18,4 +18,8 @@ public abstract class User {
         return emailId;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
 }
