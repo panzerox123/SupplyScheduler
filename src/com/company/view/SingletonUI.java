@@ -294,7 +294,8 @@ public class SingletonUI {
         showRequirementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("click");
+                frame.remove(consumerMainPage);
+                requirementUI();
             }
         });
         JButton showAdhocButton = new JButton("Show Adhoc");
@@ -302,8 +303,10 @@ public class SingletonUI {
         addRequirementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //System.out.println("CALLED");
                 int row = supplyTable.getSelectedRow();
                 Supply s = db.returnSupply(data[row][0]);
+                System.out.println(s.getName());
                 Requirement r = new Requirement(s, 1);
                 db.storeRequirement(current_user, r);
             }
@@ -324,8 +327,40 @@ public class SingletonUI {
         requirementPage = new JPanel();
         requirementPage.setLayout(new GridLayout());
 
-        db.getRequirements(current_user);
+        ArrayList<Requirement> req =  db.getRequirements(current_user);
+        String data [][] = new String[req.size()][4];
+        String colNames[] = {"ID", "NAME", "QUANTITY", "COST"};
+        int i = 0;
+        for(Requirement r : req){
+            data[i][0] = r.getId();
+            data[i][1] = r.getItem().getName();
+            data[i][2] = Integer.toString(r.getQuantity());
+            data[i][3] = Integer.toString(r.getTotalCost());
+            i+=1;
+        }
+        JTable supplyTable = new JTable(data, colNames);
+        requirementPage.add(new JScrollPane(supplyTable));
+        JButton deleteButton = new JButton("Delete");
+        JButton backButton = new JButton("Back");
 
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                db.deleteRequirement(data[supplyTable.getSelectedRow()][0]);
+                frame.remove(requirementPage);
+                requirementUI();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(requirementPage);
+                consumerMainUI();
+            }
+        });
+        requirementPage.add(deleteButton);
+        requirementPage.add(backButton);
         frame.add(requirementPage);
         frame.repaint();
         frame.revalidate();

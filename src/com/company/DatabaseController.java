@@ -121,6 +121,7 @@ public class DatabaseController {
                 d.getInteger("cost"),
                 d.getInteger("stock")
         );
+        s.setItem_id(supply_id);
         return s;
     }
 
@@ -152,9 +153,35 @@ public class DatabaseController {
         } else return null;
     }
 
-    public String getRequirements(String consumer_id){
+    public ArrayList<Requirement> getRequirements(String consumer_id){
         MongoCollection<Document> requirements = db.getCollection("requirements");
-        return null;
+        FindIterable<Document> ds = requirements.find(Filters.eq("consumer_id", consumer_id));
+        if(ds == null) return null;
+        ArrayList<Requirement> req = new ArrayList<Requirement>();
+        for(Document d: ds){
+            Supply s = returnSupply(d.getString("item_id"));
+            Requirement r = new Requirement(s, d.getInteger("quantity"));
+            r.setId(d.getObjectId("_id").toString());
+            req.add(r);
+        }
+        return req;
+    }
+
+    public void deleteRequirement(String req_id){
+        MongoCollection<Document> requirements = db.getCollection("requirements");
+        ObjectId id = new ObjectId(req_id);
+        requirements.findOneAndDelete(Filters.eq("_id", id));
+    }
+
+    public void fullfillableRequirements(String producer_id){
+        MongoCollection<Document> supplies = db.getCollection("supplies");
+        MongoCollection<Document> requirements = db.getCollection("requirements");
+        FindIterable<Document> ds = supplies.find(Filters.eq("producer_id", producer_id));
+        ArrayList<Requirement> req = new ArrayList<Requirement>();
+        for(Document d: ds){
+            String supply_id = d.getObjectId("_id").toString();
+
+        }
     }
 
     public String storeAdhoc(Consumer consumer){
