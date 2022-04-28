@@ -9,4 +9,16 @@ public class CartItem {
         this.quantity=quantity;
         this.totalCost = this.quantity * this.item.cost;
     }
+
+    public Supply getItem() {
+        return item;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getTotalCost() {
+        return totalCost;
+    }
 }

@@ -8,7 +8,7 @@ public class Consumer extends User{
     List<Adhoc> adhocList;
     String consumerAddress;
     public Consumer(String username, String password, String emailId){
-        super( username, password, emailId);
+        super(username, password, emailId);
         requirementList = new ArrayList<Requirement>();
         adhocList = new ArrayList<Adhoc>();
         consumerAddress = "";
