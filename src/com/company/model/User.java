@@ -10,7 +10,10 @@ public abstract class User {
         this.emailId = emailId;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> UI
     public String getUsername() {
         return username;
     }

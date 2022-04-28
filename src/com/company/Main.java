@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         DatabaseController db = DatabaseController.getInstance();
         String res = db.registerProducer(new Producer("kunal1", "pass", "kunal@gmail.com"));
         System.out.println("here" + res);
@@ -21,6 +22,11 @@ public class Main {
         }
         //UI ui = UI.getInstance();
         //ui.mainUI();
+=======
+        Database db = Database.getInstance();
+        db.registerConsumer(new Consumer("kunal1", "pass", "kunal@gmail.com"));
+        db.loginConsumer("kunal1","pass");
+>>>>>>> UI
     }
     public void Login(String Uname,String pass,String email){
 //        if(Uname=="");
