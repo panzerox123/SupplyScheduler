@@ -2,7 +2,7 @@ package com.company.model;
 
 public abstract class User {
     String username;
-    String password;
+    private String password;
     String emailId;
     public User(String username, String password, String emailId){
         this.username = username;
@@ -19,7 +19,4 @@ public abstract class User {
         return emailId;
     }
 
-    public String getPassword() {
-        return password;
-    }
 }

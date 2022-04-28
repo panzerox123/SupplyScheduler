@@ -1,6 +1,6 @@
 package com.company.model;
 
-public class Supply {
+public abstract class Supply {
     int id;
     String name;
     int cost;
