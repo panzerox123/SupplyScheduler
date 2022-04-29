@@ -37,9 +37,12 @@ public class DatabaseController {
     public String loginConsumer(String username, String password){
         MongoCollection<Document> consumers = db.getCollection("consumers");
         Document d = consumers.find(Filters.and(Filters.eq("username", username), Filters.eq("password", password))).first();
-        System.out.println(d);
         if(d != null) return d.get("_id").toString();
-        else return null;
+        MongoCollection<Document> producer = db.getCollection("producers");
+        Document d1 = producer.find(Filters.and(Filters.eq("username", username), Filters.eq("password", password))).first();
+        //System.out.println(d);
+        if(d1 != null) return d1.get("_id").toString();
+        return null;
     }
 
     public String registerProducer(Producer producer){
